@@ -3,10 +3,19 @@ import shutil
 import logging
 from copystatic import copy_files_recursive
 from gencontent import generate_pages_recursive
+import sys
 
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
+
+
+basepath = "/"
+if len(sys.argv) == 2:
+    basepath = sys.argv[1]
+if len (sys.argv) > 2:
+    logger.error("Usage: main.py [basepath]")
+    exit(1)
 
 
 dir_path_static = "./static"
