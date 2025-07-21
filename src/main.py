@@ -34,7 +34,11 @@ def main():
     logger.info("Copying static content from to public")
     copy_files_recursive(dir_path_static, dir_path_public)
     logger.info("Generating content in public")
-    generate_pages_recursive(dir_path_content, template_path, os.path.join(basepath, dir_path_public))
+    generate_pages_recursive(dir_path_content,
+        template_path,
+        dir_path_public,
+        basepath
+    )
 
 
 if __name__ == "__main__":

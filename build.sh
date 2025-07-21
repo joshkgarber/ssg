@@ -1,1 +1,1 @@
-python3 src/main.py "/home/jkg/projects/web/boot.dev/ssg/"
+python3 src/main.py "https://joshkgarber.github.io/ssg/"
