@@ -2,7 +2,7 @@ import os
 import shutil
 import logging
 from copystatic import copy_contents
-from gencontent import generate_page
+from gencontent import generate_pages_recursive
 
 
 logger = logging.getLogger(__name__)
@@ -25,10 +25,10 @@ def main():
     copy_contents(dir_path_static, dir_path_public)
     logger.info("Finished copying contents")
     logger.info("Start generating index page")
-    generate_page(
-        os.path.join(dir_path_content, "index.md"),
+    generate_pages_recursive(
+        dir_path_content,
         template_path,
-        os.path.join(dir_path_public, "index.html")
+        dir_path_public
     )
     logger.info("Finished generating index page")
 
