@@ -41,7 +41,7 @@ def block_to_blocktype(block):
 
 
 def check_is_ol(lines):
-    ol_pattern = "^[1-9]\d*\. .*?$"
+    ol_pattern = r"^[1-9]\d*\. .*?$"
     counter = 1
     for line in lines:
         if re.fullmatch(ol_pattern, line):

@@ -96,3 +96,5 @@ def text_to_textnodes(text):
             TextType.ITALIC
         )
     )
+
+
