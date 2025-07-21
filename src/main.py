@@ -19,7 +19,7 @@ if len (sys.argv) > 2:
 
 
 dir_path_static = "./static"
-dir_path_public = "./public"
+dir_path_public = "./docs"
 dir_path_content = "./content"
 template_path = "./template.html"
 
@@ -34,7 +34,7 @@ def main():
     logger.info("Copying static content from to public")
     copy_files_recursive(dir_path_static, dir_path_public)
     logger.info("Generating content in public")
-    generate_pages_recursive(dir_path_content, template_path, dir_path_public )
+    generate_pages_recursive(dir_path_content, template_path, os.path.join(basepath, dir_path_public))
 
 
 if __name__ == "__main__":

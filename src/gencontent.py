@@ -30,6 +30,8 @@ def generate_page(from_path, template_path, dest_path):
     logger.info("Inserting title and page content into template")
     template = template.replace("{{ Title }}", title)
     template = template.replace("{{ Content }}", content)
+    template.replace('href="/', f'href="{dest_path}')
+    template.replace('src="/', f'src="{dest_path}')
     logger.info(f"Writing {dest_path} to disk")
     path = os.path.dirname(dest_path)
     if not os.path.exists(path):
