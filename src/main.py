@@ -1,7 +1,7 @@
 import os
 import shutil
 import logging
-from copystatic import copy_contents
+from copystatic import copy_files_recursive
 from gencontent import generate_pages_recursive
 
 
@@ -16,21 +16,16 @@ template_path = "./template.html"
 
 
 def main():
+    logger.info("Clearing public")
     if not os.path.exists(dir_path_static):
         raise ValueError("Source folder does not exist")
     if os.path.exists(dir_path_public):
         shutil.rmtree(dir_path_public)
     os.mkdir(dir_path_public)
-    logger.info("Start copying contents")
-    copy_contents(dir_path_static, dir_path_public)
-    logger.info("Finished copying contents")
-    logger.info("Start generating index page")
-    generate_pages_recursive(
-        dir_path_content,
-        template_path,
-        dir_path_public
-    )
-    logger.info("Finished generating index page")
+    logger.info("Copying static content from to public")
+    copy_files_recursive(dir_path_static, dir_path_public)
+    logger.info("Generating content in public")
+    generate_pages_recursive(dir_path_content, template_path, dir_path_public )
 
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 import logging
 from document import markdown_to_html_node
 import os
+from pathlib import Path
 
 
 logger = logging.getLogger(__name__)
@@ -38,21 +39,14 @@ def generate_page(from_path, template_path, dest_path):
 
 
 def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
-    entries = os.listdir(dir_path_content)
-    for entry in entries:
-        path = os.path.join(dir_path_content, entry)
-        if os.path.isfile(path):
-            filename = entry[:-2] + "html"
-            generate_page(
-                path,
-                template_path,
-                os.path.join(dest_dir_path, filename)
-            )
+    files = os.listdir(dir_path_content)
+    for file in files:
+        from_path = os.path.join(dir_path_content, file)
+        dest_path = os.path.join(dest_dir_path, file)
+        if os.path.isfile(from_path):
+            dest_path = Path(dest_path).with_suffix(".html")
+            generate_page(from_path, template_path, dest_path)
             continue
-        generate_pages_recursive(
-            path,
-            template_path,
-            os.path.join(dest_dir_path, entry)
-            )
+        generate_pages_recursive(from_path, template_path, dest_path)
 
 
