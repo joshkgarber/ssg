@@ -192,6 +192,7 @@ class TestSplitNodes(unittest.TestCase):
         )
         self.assertListEqual([("Docs", "https://docs.com"),], matches)
 
+
     def test_extract_two_links(self):
         matches = extract_markdown_links(
             "Source: [Docs](https://docs.com) See: [This](https://docs.com/this)"
@@ -203,6 +204,13 @@ class TestSplitNodes(unittest.TestCase):
             ],
             matches
         )
+
+
+    def test_extract_link_brackets_following(self):
+        matches = extract_markdown_links(
+            "[Click here](https://example.com) (it's safe, I swear!)"
+        )
+        self.assertListEqual([("Click here", "https://example.com")], matches)
 
 
     def test_split_images(self):
